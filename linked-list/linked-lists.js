@@ -10,15 +10,15 @@ class linkedList{
         this.length++
     }
 
-    append(value){
+    append(key,value){
         if(!this.head){ // if there isnt a head make one
-            this.head = new Node(value)
+            this.head = new Node(key, value)
         }else{
             let current = this.head
             while(current.next){
                 current = current.next;
             }
-            current.next = new Node(value)
+            current.next = new Node(key, value)
         }
         this.length++
     }
@@ -130,8 +130,8 @@ class linkedList{
 }   
 
 class Node{
-    constructor(key, value, next){ // need to work the functions to have the key too. 
-        this.key = key;              // prob the value on the append will be the key because we are searching with that.
+    constructor(key, value, next){ 
+        this.key = key;              
         this.value = value;
         this.next = next || null;
     }
