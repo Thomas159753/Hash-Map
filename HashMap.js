@@ -21,14 +21,13 @@ class HashMap {
         for (let i = 0; i < value.length; i++) {
           hashCode = (primeNumber * hashCode + value.charCodeAt(i)) % this.buckets.length;
         }
-        hashCode
         return hashCode;
     }
     set(key, value){
         // this.checkLoad(); // need to make that funckion
         
         const hashCode = this.hash(key);
-        hashCode //
+        hashCode
 
         if(this.buckets[hashCode] === null){
             this.buckets[hashCode] = {key, value}
@@ -44,10 +43,48 @@ class HashMap {
             this.buckets[hashCode].append(key, value)
         }
     }
+    get(key){
+        const hashCode = this.hash(key);
+
+        if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){
+            const node = this.buckets[hashCode].findNodeByKey(key)
+
+            return node ? node.value : null;
+        }else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
+            return this.buckets[hashCode].value
+        }
+    }
+    has(key){
+        const hashCode = this.hash(key);
+        if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){
+            key
+            const node = this.buckets[hashCode].findNodeByKey(key)
+            node
+            return node ? true : false
+
+        }else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
+            return true
+        }
+        return false
+    }
 
 }
 
 let Hashm = new HashMap(11, 75);
-Hashm.set('tsiotsias', 'thomas tsiotsias');
-Hashm.set('tsiotsias', 'Anastasia Binou');
-Hashm.set('tsiotsias', 'Joseph Tsiotsias');
+
+Hashm.set('tsiots', 'thomas tsiotsias');
+Hashm.set('binou', 'Anastasia Binou');
+Hashm.set('tsiotsi', 'Joseph Tsiotsias');
+Hashm.set('e', 'Joseph Tsiotsias'); // has is 2
+
+let get = Hashm.get('binou')
+get
+
+let getCol = Hashm.get('tsiotsi')
+getCol
+
+let has = Hashm.has('binou')
+has
+
+let hasCol = Hashm.has('e')
+hasCol

@@ -5,7 +5,7 @@ class linkedList{
     }
 
     prepend(value){
-        const newNode = new Node(value, this.head);
+        const newNode = new Node(key, value, this.head);
         this.head = newNode;
         this.length++
     }
@@ -74,16 +74,29 @@ class linkedList{
         }
         return current.value === value ? true : false;
     }
-    find(value){
+    find(key){
         if(this.length === 0) return null
         let current = this.head
         let currentIndex = 0
-        while(current.value !== value && current.next){
+        while(current.key !== key && current.next){
             current = current.next
             currentIndex++
         }
-        if(current.value === value){
+        if(current.key === key){
             return currentIndex
+        }
+        return null
+    }
+    findNodeByKey(key){
+        if(this.length === 0) return null
+        let current = this.head
+        let currentIndex = 0
+        while(current.key !== key && current.next){
+            current = current.next
+            currentIndex++
+        }
+        if(current.key === key){
+            return current
         }
         return null
     }
@@ -110,7 +123,7 @@ class linkedList{
         const prev = this.at(index - 1);
         if (prev == null) return null
 
-        prev.next = new Node(value, prev.next)
+        prev.next = new Node(key, value, prev.next)
         this.length++
     }
 
