@@ -39,8 +39,10 @@ class HashMap {
             newList.append(this.buckets[hashCode].key, this.buckets[hashCode].value)
             newList.append(key, value)
             this.buckets[hashCode] = newList
+            this.length++
         }else if(this.buckets[hashCode] instanceof linkedList){
             this.buckets[hashCode].append(key, value)
+            this.length++
         }
     }
     get(key){
@@ -57,13 +59,22 @@ class HashMap {
     has(key){
         const hashCode = this.hash(key);
         if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){
-            key
             const node = this.buckets[hashCode].findNodeByKey(key)
-            node
+            
             return node ? true : false
 
         }else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
             return true
+        }
+        return false
+    }
+    remove(key){
+        const hashCode = this.hash(key);
+        if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){ // i was thinking for link list do i really need this.buckets[hashCode]?
+            this.buckets[hashCode].removeAt(key) //also do i need one line to check if first is there and also has a value before deleting
+        }                                       // also need to edit the remove at to incoperate the key...
+        else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
+            this.buckets[hashCode] = null
         }
         return false
     }
