@@ -28,7 +28,6 @@ class HashMap {
         
         const hashCode = this.hash(key);
         hashCode
-
         if(this.buckets[hashCode] === null){
             this.buckets[hashCode] = {key, value}
             this.length++
@@ -51,8 +50,9 @@ class HashMap {
         if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){
             const node = this.buckets[hashCode].findNodeByKey(key)
 
-            return node ? node.value : null;
+            return node ? node.node.value : null;
         }else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
+
             return this.buckets[hashCode].value
         }
     }
@@ -62,21 +62,38 @@ class HashMap {
             const node = this.buckets[hashCode].findNodeByKey(key)
             
             return node ? true : false
-
         }else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
+
             return true
         }
+
         return false
     }
     remove(key){
         const hashCode = this.hash(key);
-        if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){ // i was thinking for link list do i really need this.buckets[hashCode]?
-            this.buckets[hashCode].removeAt(key) //also do i need one line to check if first is there and also has a value before deleting
-        }                                       // also need to edit the remove at to incoperate the key...
+        if(this.buckets[hashCode] && this.buckets[hashCode] instanceof linkedList){ 
+            this.buckets[hashCode].removeAt(key)
+            this.length--
+
+            return true
+        }                                       
         else if(this.buckets[hashCode] && this.buckets[hashCode].key === key){
             this.buckets[hashCode] = null
+            this.length--
+
+            return true
         }
+
         return false
+    }
+
+    arrayLength(){
+        return this.length;
+    }
+
+    clear(){
+        this.buckets.fill(null);
+        this.length = 0
     }
 
 }
@@ -86,16 +103,37 @@ let Hashm = new HashMap(11, 75);
 Hashm.set('tsiots', 'thomas tsiotsias');
 Hashm.set('binou', 'Anastasia Binou');
 Hashm.set('tsiotsi', 'Joseph Tsiotsias');
-Hashm.set('e', 'Joseph Tsiotsias'); // has is 2
+Hashm.set('e', 'Joseph Tsiotsias2');
 
-let get = Hashm.get('binou')
-get
 
-let getCol = Hashm.get('tsiotsi')
-getCol
 
-let has = Hashm.has('binou')
-has
+// let getTom = Hashm.get('tsiots')
+// getTom
 
-let hasCol = Hashm.has('e')
-hasCol
+// let get = Hashm.get('binou')
+// get
+
+// let getCol = Hashm.get('tsiotsi')
+// getCol
+
+// let has = Hashm.has('binou')
+// has
+
+// let hasCol = Hashm.has('e')
+// hasCol
+
+// Hashm.buckets[2].toString();
+
+// let rem = Hashm.remove("binou")
+
+// let remCol = Hashm.remove("tsiots")
+
+// Hashm.buckets[2].toString();
+
+// Hashm.arrayLength()
+
+Hashm.clear();
+
+Hashm
+
+

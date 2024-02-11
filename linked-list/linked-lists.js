@@ -96,7 +96,7 @@ class linkedList{
             currentIndex++
         }
         if(current.key === key){
-            return current
+            return {node: current, index: currentIndex}
         }
         return null
     }
@@ -131,11 +131,17 @@ class linkedList{
         this.head = this.head.next;
         this.length--
     }
-    removeAt(index){
-        if(index === 0 ) return this.removeHead()
+    removeAt(key){
+        if (this.length === 0) return null
 
-        const prev = this.at(index - 1);
-        if(prev == null) return null
+        if(this.head.key === key) {
+            this.removeHead()
+            return
+        }
+        const nodeInfo = this.findNodeByKey(key);
+        if(!nodeInfo) return null
+        const prev = this.at(nodeInfo.index - 1);
+        if(prev == null || prev.next === null) return null
 
         prev.next = prev.next.next;
         this.length--
