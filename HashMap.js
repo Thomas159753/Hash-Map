@@ -27,7 +27,6 @@ class HashMap {
         // this.checkLoad(); // need to make that funckion
         
         const hashCode = this.hash(key);
-        hashCode
         if(this.buckets[hashCode] === null){
             this.buckets[hashCode] = {key, value}
             this.length++
@@ -95,6 +94,20 @@ class HashMap {
         this.buckets.fill(null);
         this.length = 0
     }
+    keys(){
+        let allKeys = []
+        this.buckets.forEach(bucket => {
+            if(bucket && bucket instanceof linkedList){ // bucket or bucket !== null
+               allKeys.push(...bucket.getKeys())
+                
+            }else if(bucket !== null && bucket.key !== undefined){
+                allKeys.push(bucket.key);
+            }
+                
+        });
+        console.log(allKeys)
+    }
+
 
 }
 
@@ -132,7 +145,7 @@ Hashm.set('e', 'Joseph Tsiotsias2');
 
 // Hashm.arrayLength()
 
-Hashm.clear();
+Hashm.keys();
 
 Hashm
 

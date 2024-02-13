@@ -146,6 +146,18 @@ class linkedList{
         prev.next = prev.next.next;
         this.length--
     }
+    getKeys(){
+        if (this.length === 0) return null;
+        if (this.length === 1 ) return this.gethead();
+        let current = this.head;
+        let keys = []
+            while (current.next) {
+                keys.push(current.key)
+                current = current.next;
+            }
+            keys.push(current.key)
+            return keys;
+    }
 }   
 
 class Node{
@@ -157,3 +169,12 @@ class Node{
 }
 
 module.exports = linkedList
+
+// const ll = new linkedList();
+// ll.append(10, "V10")
+// ll.append(20, "V20")
+// ll.append(30, "V30")
+// ll.append(40)
+// ll.append(50)
+// ll.append(60)
+// ll.getKeys()
