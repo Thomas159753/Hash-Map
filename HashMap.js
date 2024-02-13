@@ -105,7 +105,17 @@ class HashMap {
             }
                 
         });
-        console.log(allKeys)
+    }
+    values(){
+        let allValues = []
+        this.buckets.forEach(bucket => {
+            if(bucket && bucket instanceof linkedList){
+            allValues.push(...bucket.getValues())
+            }else if (bucket !== null && bucket !== undefined){
+                allValues.push(bucket.value);
+            }
+        })
+        return allValues
     }
 
 

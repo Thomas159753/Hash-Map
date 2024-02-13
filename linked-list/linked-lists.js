@@ -148,15 +148,31 @@ class linkedList{
     }
     getKeys(){
         if (this.length === 0) return null;
-        if (this.length === 1 ) return this.gethead();
+        if (this.length === 1 ) return this.head.key;
         let current = this.head;
         let keys = []
             while (current.next) {
                 keys.push(current.key)
                 current = current.next;
             }
-            keys.push(current.key)
-            return keys;
+        keys.push(current.key)
+        return keys;
+    }
+    getValues(){
+    if (this.length === 0) return null;
+    if (this.length === 1) return this.head.value;
+        let current = this.head;
+        let values = []
+        while(current.next){
+            if(current.value !== undefined){
+                values.push(current.value)
+                current = current.next;
+            }else if (current.value === undefined || current.value === null){
+                values.push(null)
+            }
+        }
+        values.push(current.value);
+        return values
     }
 }   
 
@@ -170,11 +186,13 @@ class Node{
 
 module.exports = linkedList
 
-// const ll = new linkedList();
-// ll.append(10, "V10")
-// ll.append(20, "V20")
-// ll.append(30, "V30")
-// ll.append(40)
-// ll.append(50)
-// ll.append(60)
+const ll = new linkedList();
+ll.append(10, "V10")
+ll.append(20, "V20")
+ll.append(30, "V30")
+ll.append(40)
+ll.append(50)
+ll.append(60)
 // ll.getKeys()
+
+ll.getValues();
