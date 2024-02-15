@@ -97,25 +97,32 @@ class HashMap {
     keys(){
         let allKeys = []
         this.buckets.forEach(bucket => {
-            if(bucket && bucket instanceof linkedList){ // bucket or bucket !== null
+            if(bucket instanceof linkedList){ // bucket or bucket !== null
                allKeys.push(...bucket.getKeys())
                 
-            }else if(bucket !== null && bucket.key !== undefined){
+            }else if(bucket && bucket.key !== undefined){
                 allKeys.push(bucket.key);
-            }
-                
+            }    
         });
+        return allKeys
     }
     values(){
         let allValues = []
         this.buckets.forEach(bucket => {
-            if(bucket && bucket instanceof linkedList){
+            if(bucket instanceof linkedList){
             allValues.push(...bucket.getValues())
-            }else if (bucket !== null && bucket !== undefined){
+            }else if (bucket && bucket.value !== undefined){
                 allValues.push(bucket.value);
             }
         })
         return allValues
+    }
+    entries(){
+        const allKey = this.keys();
+        const allValues = this.values();
+
+        let allPairs = allKey.map((key, index) => [key, allValues[index]]);
+        return allPairs;
     }
 
 
@@ -128,35 +135,10 @@ Hashm.set('binou', 'Anastasia Binou');
 Hashm.set('tsiotsi', 'Joseph Tsiotsias');
 Hashm.set('e', 'Joseph Tsiotsias2');
 
-
-
-// let getTom = Hashm.get('tsiots')
-// getTom
-
-// let get = Hashm.get('binou')
-// get
-
-// let getCol = Hashm.get('tsiotsi')
-// getCol
-
-// let has = Hashm.has('binou')
-// has
-
-// let hasCol = Hashm.has('e')
-// hasCol
-
-// Hashm.buckets[2].toString();
-
-// let rem = Hashm.remove("binou")
-
-// let remCol = Hashm.remove("tsiots")
-
-// Hashm.buckets[2].toString();
-
-// Hashm.arrayLength()
-
 Hashm.keys();
+Hashm.entries();
 
-Hashm
+
+
 
 

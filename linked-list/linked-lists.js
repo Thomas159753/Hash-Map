@@ -169,6 +169,7 @@ class linkedList{
                 current = current.next;
             }else if (current.value === undefined || current.value === null){
                 values.push(null)
+                current = current.next;
             }
         }
         values.push(current.value);
